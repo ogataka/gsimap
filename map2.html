@@ -66,6 +66,15 @@ const gsimap_init = function(map, layer) {
        
     layer.addIcon(35.943560, 136.188917, "鯖江駅", "icon/icon-purple.png", 32)
     layer.addIcon(35.942729, 136.198846, "眼鏡会館", "icon/icon-purple.png", 32)
+    
+    var query = `
+        prefix ic: <http://imi.go.jp/ns/core/rdf#>
+        
+		select ?uri ?name ?lat ?lng {
+			?uri ic:名称 [ ic:表記 ?name ].
+			?uri ic:地理座標 [ ic:緯度 ?lat; ic:経度 ?lng; ].
+			filter(contains(str(?name),'駐車場'))
+        } limit 100
 }
 
 </script>
